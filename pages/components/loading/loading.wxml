@@ -1,0 +1,18 @@
+<view class="loading-global">
+    <view class="loading-{{type}} loading-container">
+        <view class="loading-item" wx:if="{{type===1}}" wx:for="{{5}}" wx:key="index"></view>
+        <view class="loading-item" wx:if="{{type===2}}"></view>
+        <view class="loading-item" wx:if="{{type===3}}" wx:for="{{5}}" wx:key="index"></view>
+        <view class="loading-item" wx:if="{{type===4}}" wx:for="{{5}}" wx:key="index"></view>
+        <view class="loading-item" wx:if="{{type===5}}" wx:for="{{5}}" wx:key="index"></view>
+        <view class="loading-item" wx:if="{{type===6}}" wx:for="{{5}}" wx:key="index"></view>
+        <view class="loading-item" wx:if="{{type===7}}" wx:for="{{8}}" wx:key="index"></view>
+        <view class="loading-item" wx:if="{{type===8}}" wx:for="{{5}}" wx:key="index"></view>
+        <view class="loading-item" wx:if="{{type===9}}"></view>
+        <view class="loading-item" wx:if="{{type===10}}"></view>
+        <view class="loading-item" wx:if="{{type===11}}" wx:for="{{8}}" wx:key="index"></view>
+        <view class="loading-item" wx:if="{{type===12}}" wx:for="{{4}}" wx:key="index">
+            <view class="loading-span"></view>
+        </view>
+    </view>
+</view>

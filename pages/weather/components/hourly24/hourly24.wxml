@@ -1,0 +1,15 @@
+<view class='hourly hourly-24-content' wx:if='{{hourly24Datas.length}}'>
+    <view class='title'>24小时天气预报</view>
+    <view class='hourlys'>
+        <view class='item' wx:for='{{hourly24Datas}}' wx:key='index'>
+            <view class='date i'>{{item.fxTimeFormat}}</view>
+            <view class='temperature i'>{{item.temp}}℃</view>
+            <view class='weather i'>
+                <text>{{item.text}}</text>
+                <!-- <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image> -->
+            </view>
+            <!-- <view class='wind i'>{{item.windDir}}</view>
+            <view class='wind i'>{{item.windScale}}级</view> -->
+        </view>
+    </view>
+</view>

@@ -1,0 +1,10 @@
+<view class="box" wx:if="{{SHOW_TOP}}">
+  <view class='arrow' style="margin-right:{{marRight}}px"></view>
+  <view class='body' >
+     <view class="textContent">{{text}}</view>
+     <view class="split-line"></view>
+     <view class="cancle_btn" bindtap="okHandler">
+       <image src="./assets/cancle.svg"  />
+     </view>
+  </view>
+</view>

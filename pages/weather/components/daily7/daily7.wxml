@@ -1,0 +1,14 @@
+<view class='daily' wx:if='{{daily7Datas.length}}'>
+    <view class='title'>7 天预报</view>
+    <ec-canvas class="daily-line-chart-box" id="chartLineDaily" canvas-id="daily-line-chart" ec="{{ec}}"></ec-canvas>
+    <view class='dailys'>
+        <view class='item' wx:for='{{daily7Datas}}' wx:key='index'>
+            <view class='date i'>{{item.fxDateFormat}}</view>
+            <view class='temperature i'>{{item.tempMin}}~{{item.tempMax}}℃</view>
+            <view class='weather i'>
+                {{item.textDay===item.textNight?item.textDay:item.textDay+'转'+item.textNight}}
+                <!-- <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image> -->
+            </view>
+        </view>
+    </view>
+</view>

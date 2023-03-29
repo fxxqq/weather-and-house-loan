@@ -1,0 +1,51 @@
+.daily .dailys {
+    display: flex;
+    flex-direction: row;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 24rpx;
+    padding-top: 20rpx;
+    background: #F7F8F9;
+    margin-bottom: 20rpx;
+    overflow-x: scroll;
+    margin: 0 40rpx;
+}
+
+.daily .dailys .item {
+    border-right: 1px dashed rgba(255, 255, 255, 0.22);
+    display: flex;
+    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.daily .dailys .temperature {
+    flex: 1;
+    margin: 20rpx;
+}
+
+.daily .dailys .temperature,
+.daily .dailys .weather {
+    font-size: 28rpx;
+}
+
+.daily .dailys .date {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.daily .dailys .wind {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 24rpx;
+}
+
+.daily-line-chart-box {
+    width: 600rpx;
+    height: 400rpx;
+}
+
+.day-30-title {
+    color: rgba(255, 255, 255, 0.54);
+    text-align: center;
+}
