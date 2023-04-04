@@ -10,52 +10,62 @@
         </view>
       </view>
     </view>
-    <view class="{{'content weather-city-container weather-city-'+nowData.text_en}}">
-      <view wx:if="{{nowData.text_en&&nowData.text_en!=='sun'}}">
-        <image class="weather-city-image" src="{{'../../image/weather-city/'+nowData.text_en+'--day.png'}}" />
+    <view class="{{'content weather-city-container weather-city-'+weatherData.text_en}}">
+      <view wx:if="{{weatherData.text_en&&weatherData.text_en!=='sun'}}">
+        <image class="weather-city-image" src="{{'../../image/weather-city/'+weatherData.text_en+'--day.png'}}" />
       </view>
       <view class='info today'>
         <view class="today-header">
           <view class='location' bindtap='toCitychoose'>{{locationName}}</view>
           <view class='time'>
-            {{nowData.obsTimeFormat}} 更新
+            {{weatherData.obsTimeFormat}} 更新
             <image class="icon-refresh" src="/image/icon/icon-refresh.png" />
           </view>
         </view>
-        <view class="today-tip" bindtap="openWarningToast">
-          <view class="subscribe-button">查看天气预警</view>
+        <view class="today-tip" wx:if="{{warning.text}}" bindtap="openWarningToast">
+          <view class="subscribe-button">{{warning.title}}</view>
         </view>
         <!-- <image class="weather-city-image" src="{{'https://a.hecdn.net/img/common/icon/202106d/154.png'}}" /> -->
         <view class='temp num' decode='true'>
-          {{nowData.temp || '-'}}
+          {{weatherData.temp || '-'}}
           <text class="unit">℃</text>
         </view>
         <view class="today-weather-air">
-          <view class='weather'>{{nowData.text || '--'}}</view>
+          <view class='weather'>{{weatherData.text || '--'}}</view>
           <view class='line'></view>
-          <view class='air-now'>{{airNow.aqi +airNow.category}}</view>
+          <view class='air-now'>{{weatherData.aqi +weatherData.category}}</view>
         </view>
         <view class='details current-details'>
           <view class='detail'>
+            <tooltip tips="体感温度（英语：apparent temperature）是指将人体所感受到的冷暖程度，转换成同等之温度。体感温度会受到气温、风速与相对湿度的综合影响。" placement="bottom">
+              <view slot="content">
+                体感温度
+                <image class="icon-question" src='/image/icon/icon-question.png'></image>
+              </view>
+            </tooltip>
+            <view>{{weatherData.feelsLike}}℃</view>
+          </view>
+          <view class='detail'>
             <view>降水量</view>
-            <view>{{nowData.precip}}mm</view>
+            <view>{{weatherData.precip}}mm</view>
           </view>
           <view class='detail'>
             <view>相对湿度</view>
-            <view>{{nowData.humidity}}%</view>
+            <view>{{weatherData.humidity}}%</view>
           </view>
           <view class='detail'>
-            <view>{{nowData.windDir}}</view>
-            <view>{{nowData.windScale}}级</view>
+            <view>{{weatherData.windDir}}</view>
+            <view>{{weatherData.windScale}}级</view>
           </view>
           <view class='detail'>
             <view>能见度</view>
-            <view>{{nowData.vis}}km</view>
+            <view>{{weatherData.vis}}km</view>
           </view>
         </view>
-        <view class="comfort-text">{{comfText}}</view>
+        <view class="comfort-text">{{weatherData.comfText}}</view>
         <view class="rainfall-handle" bindtap='getRainfall'>
-          {{isRainfall?rainfall:'查看未来两小时降雨预报>'}}
+          <!-- {{rainfall}} -->
+          {{isRainfall?weatherData.rainfall:'查看未来两小时降雨预报>'}}
         </view>
         <!-- <view>icon{{rainfall}}></view> -->
       </view>
@@ -66,7 +76,7 @@
       30日天气预报
       <image class='more' src='/image/icon/icon-arrow.png'></image>
     </view>
-    <view class='footer'>实况数据由和风天气提供，均为近实时数据，相比真实的物理世界有5-20分钟的延迟，请根据实况数据中的obsTime确定数据对应的准确时间。</view>
+    <view class='footer'>实况数据由和风天气提供，均为近实时数据，相比真实的物理世界有5-20分钟的延迟，请根据页面中的更新时间确定数据对应的准确时间。</view>
     <view class='toast' wx:if='{{warningShow}}'>
       <view class='mask' catchtap='hideWarningToast'></view>
       <view class='wrapper'>
@@ -74,7 +84,7 @@
           <view class='t'>{{warning.title}}</view>
           <view class='content'>{{warning.text}}</view>
         </view>
-        <view class='box'>
+        <view class='box' wx:else>
           <view class='content'>当前无预警</view>
         </view>
       </view>

@@ -1,5 +1,6 @@
 <view class='hourly hourly-24-content' wx:if='{{hourly24Datas.length}}'>
     <view class='title'>24小时天气预报</view>
+    15:00左右预计有雨
     <view class='hourlys'>
         <view class='item' wx:for='{{hourly24Datas}}' wx:key='index'>
             <view class='date i'>{{item.fxTimeFormat}}</view>

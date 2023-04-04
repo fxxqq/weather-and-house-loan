@@ -1,10 +1,11 @@
 {
   "navigationBarTitleText": "天气查询",
   "usingComponents": {
-    "loading-page": "../components/loading/loading",
+    "loading-global": "../components/loading/loading",
     "icon": "../components/icon/index",
     "add-tips-main": "../components/add-tips-main/index",
     "hourly24": "./components/hourly24/hourly24",
-    "daily7": "./components/daily7/daily7"
+    "daily7": "./components/daily7/daily7",
+    "tooltip":"../components/tooltip/tooltip"
   }
 }

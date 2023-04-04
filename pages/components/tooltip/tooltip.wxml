@@ -1,0 +1,6 @@
+<view class="tooltip-box {{externalClasses}}" bindtap="clickTips">
+    <view class="tips {{ isNeedTips ? 'visible' : 'hidden' }} {{ placement }}" style="width: {{ tooltipWidth + 'rpx' }}">
+        {{ tips }}
+    </view>
+    <slot name="content"></slot>
+</view>

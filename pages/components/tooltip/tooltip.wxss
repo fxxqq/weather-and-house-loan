@@ -1,0 +1,31 @@
+.tooltip-box {
+    position: relative;
+}
+
+.tooltip-box .hidden {
+    display: none;
+}
+
+.tooltip-box .tips {
+    position: absolute;
+    background: rgba(0, 0, 0, 1);
+    padding: 20rpx;
+    color: #fff;
+    border-radius: 15rpx;
+}
+
+.tooltip-box .tips.top {
+    top: 30rpx;
+}
+
+.tooltip-box .tips.bottom {
+    bottom: 30rpx;
+}
+
+.tooltip-box .tips.left {
+    left: 30rpx;
+}
+
+.tooltip-box .tips.right {
+    right: 30rpx;
+}

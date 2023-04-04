@@ -12,7 +12,25 @@ Component({
     },
     lifetimes: {
         ready() {
-            this.getDaily()
+
+
+            let cacheData = wx.getStorageSync('cache-data') ? JSON.parse(wx.getStorageSync('cache-data')) : null;
+            let nowTime = +new Date()
+            if (cacheData && cacheData.daily7Datas) {
+                if (nowTime - cacheData.nowTime < 3 * 60 * 60 * 1000) {
+                    this.setData({
+                        daily7Datas: cacheData.daily7Datas
+                    })
+                } else {
+                    cacheData.nowTime = nowTime
+                     
+                    wx.setStorageSync("cache-data", JSON.stringify(cacheData))
+                    this.getDaily()
+                }
+            } else {
+                this.getDaily()
+            }
+
 
         },
     },
@@ -47,6 +65,11 @@ Component({
             this.setData({
                 daily7Datas: dailyRes.daily
             })
+
+            let cacheData = wx.getStorageSync('cache-data') ? JSON.parse(wx.getStorageSync('cache-data')) : null;
+            cacheData.nowTime = +new Date()
+            cacheData.daily7Datas = dailyRes.daily
+            wx.setStorageSync("cache-data", JSON.stringify(cacheData))
             this.initChart()
 
         },

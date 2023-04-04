@@ -1,4 +1,4 @@
-import { formatDate, cmpVersion, isEmptyObject } from '../../utils/util'
+import { formatDate, cmpVersion } from '../../utils/util'
 import request from '../../service/request'
 let globalData = getApp().globalData
 
@@ -9,7 +9,6 @@ Page({
     location: '',
     weatherIconUrl: globalData.weatherIconUrl,
     comfText: '',
-
     rainfall: '',
     isRainfall: false,
     warning: null,
@@ -18,27 +17,67 @@ Page({
     located: true,
     // 用来清空 input
     searchText: '',
-    // 是否已经弹出
-    hasPopped: false,
 
-
-
-    // 需要查询的城市
-    searchCity: '',
     setting: {},
 
-
     locationName: '',
-    nowData: {}
+    nowData: {},
+    isUseCache: false,
+    weatherData: null
   },
 
   onLoad() {
-    this.reloadPage()
+    this.initPage()
+  },
+  initPage(location) {
+    if (!location) {
+      this.initLocation()
+    } else {
+
+    }
+  },
+  initLocation() {
+    this.setData({
+      located: true,
+    })
+    wx.getLocation({
+      success: (res) => {
+
+        let location = `${res.longitude},${res.latitude}`
+        let cacheData = wx.getStorageSync('cache-data') ? JSON.parse(wx.getStorageSync('cache-data')) : null;
+        let nowTime = +new Date()
+        console.log("cacheData", cacheData)
+        if (cacheData) {
+
+          console.log("nowTime - cacheData.nowTime", nowTime - cacheData.nowTime)
+          if (nowTime - cacheData.nowTime < 60 * 1000) {
+            console.log("调用缓存里的数据", cacheData)
+            this.setData({
+              globalLoading: false,
+              location,
+              weatherData: cacheData
+            })
+          } else {
+            cacheData.nowTime = nowTime
+            //超过5分钟重新调用接口数据
+            wx.setStorageSync("cache-data", JSON.stringify(cacheData))
+            this.getWeatherRefresh(location)
+          }
+        } else {
+          wx.setStorageSync("cache-data", JSON.stringify({
+            nowTime
+          }))
+          this.getWeatherRefresh(location)
+        }
+      },
+      fail: (res) => {
+        this.getLocationFail(res)
+      }
+    })
   },
   reloadWeather() {
-    console.log("this.data.located")
     if (this.data.located) {
-      this.init({})
+      this.initLocation()
     } else {
       this.search(this.data.searchCity)
       this.setData({
@@ -47,18 +86,14 @@ Page({
     }
   },
   reloadPage() {
+
+
+
     this.reloadWeather()
   },
-  commitSearch(res) {
-    let val = ((res.detail || {}).value || '').replace(/\s+/g, '')
-    this.search(val)
-  },
 
-  clearInput() {
-    this.setData({
-      searchText: '',
-    })
-  },
+
+
   search(val, callback) {
     wx.pageScrollTo({
       scrollTop: 0,
@@ -68,24 +103,44 @@ Page({
       this.setData({
         located: false,
       })
-      console.log("val", val)
+
       this.getWeatherRefresh(val)
 
     }
     callback && callback()
   },
+
   getWeatherRefresh(location) {
     console.log("location", location)
-    this.setData({ location }, () => {
+    this.setData({ location }, async () => {
+      Promise.all([
+        await this.getLocationCity(),
+        await this.getWeatherNow(),
+        await this.indiceServer(),
+        await this.airServer(),
+        await this.warningServer()
+      ]).then(data => {
+        console.log("all-data", data)
+        let cacheData = wx.getStorageSync('cache-data') ? JSON.parse(wx.getStorageSync('cache-data')) : null;
+        console.log("cacheData", cacheData)
+        data.map(item => {
+          if (item) {
+            cacheData = {
+              ...cacheData,
+              ...item,
+            }
+          }
 
-      Promise.all([this.getLocationCity(), this.getWeatherNow(), this.indiceServer(), this.airServer()]).then(data => {
+        })
+
+        wx.setStorageSync("cache-data", JSON.stringify(cacheData))
         this.setData({
-          globalLoading: false
+          globalLoading: false,
+          weatherData: cacheData
         })
       })
       if (this.data.isRainfall) {
         this.minutelyServer()
-
       }
     })
 
@@ -102,40 +157,8 @@ Page({
       return false
     }
   },
-  init(params, callback) {
-    this.setData({
-      located: true,
-    })
-    wx.getLocation({
-      success: (res) => {
-        console.log("res", res)
-        let location = `${res.longitude.toFixed(2)},${res.latitude.toFixed(2)}`
-        this.getWeatherRefresh(location)
-        callback && callback()
-      },
-      fail: (res) => {
-        this.getLocationFail(res)
-      }
-    })
-  },
-  success(data, location) {
-    this.setData({
 
-      searchCity: location,
-    })
-    wx.stopPullDownRefresh()
-    let now = new Date()
-    // 存下来源数据
-    data.updateTime = now.getTime()
-    data.updateTimeFormat = formatDate(now, "MM-dd hh:mm")
-    wx.setStorage({
-      key: 'cityDatas',
-      data,
-    })
-    this.setData({
-      cityDatas: data,
-    })
-  },
+
   getLocationFail(res) {
     wx.stopPullDownRefresh()
     let errMsg = res.errMsg || ''
@@ -163,6 +186,7 @@ Page({
   },
   async getLocationCity() {
     this.data.locationName = '定位中...'
+    let locationName
     let res = await request({
       apiType: 'geo',
       url: '/v2/city/lookup',
@@ -172,12 +196,14 @@ Page({
     })
     console.log("getLocationCity", res.location[0].name)
     if (res.code === '200') {
+      locationName = `${res.location[0].adm1} ${res.location[0].name}`
       this.setData({
-        locationName: res.location[0].name
+        locationName
       })
-
     }
+    return { locationName }
   },
+
   async getWeatherNow() {
     // 实时天气:https://dev.qweather.com/docs/api/weather/weather-now/
     let weatherNowDataRes = await request({
@@ -190,7 +216,6 @@ Page({
 
     if (weatherNowDataRes.code === '200') {
       let nowData = weatherNowDataRes.now
-
       nowData.obsTimeFormat = formatDate(new Date(nowData.obsTime), "yy-MM-dd hh:mm")
 
       const textList = ['晴', '雨', '雪', '云', '雾', '阴']
@@ -201,12 +226,22 @@ Page({
         }
       }
 
-      this.setData({
-        nowData
-      })
-      this.clearInput()
-      console.log("nowData, location", nowData, location)
-      this.success(nowData, location)
+      wx.stopPullDownRefresh()
+
+
+      return {
+        temp: nowData.temp,
+        text: nowData.text,
+        text_en: nowData.text_en,
+        windDir: nowData.windDir,
+        windScale: nowData.windScale,
+        vis: nowData.vis,
+        humidity: nowData.humidity,
+        icon: nowData.icon,
+        precip: nowData.precip,
+        obsTimeFormat: formatDate(new Date(nowData.obsTime), "yy-MM-dd hh:mm"),
+        feelsLike: nowData.feelsLike
+      }
     }
   },
 
@@ -220,15 +255,12 @@ Page({
       },
     })
     if (indiceRes.code === '200') {
-      this.setData({
+      return {
         comfText: indiceRes.daily[0].text
-      })
+      }
     } else {
-      this.setData({
-        comfText: ''
-      })
+      return null
     }
-
   },
   async minutelyServer() {
     let minutelyRes = await request({
@@ -246,6 +278,7 @@ Page({
 
   },
   async warningServer(cb) {
+    let warning
     let warningRes = await request({
       apiType: 'qweather',
       url: `/v7/warning/now`,
@@ -255,9 +288,11 @@ Page({
     })
     cb && cb()
     if (warningRes.code === '200') {
-      this.setData({
-        warning: warningRes.warning && warningRes.warning.length ? warningRes.warning[0] : null
-      })
+      warning = warningRes.warning && warningRes.warning.length ? warningRes.warning[0] : null
+
+    }
+    return {
+      warning
     }
 
   },
@@ -271,9 +306,10 @@ Page({
     })
 
     if (airingRes.code === '200') {
-      this.setData({
-        airNow: airingRes.now
-      })
+      return {
+        aqi: airingRes.now.aqi,
+        category: airingRes.now.category
+      }
     }
 
   },
@@ -294,8 +330,6 @@ Page({
     console.log("cityDatas", cityDatas)
   },
   openSetting() { },
-
-
 
 
   checkUpdate(setting) {

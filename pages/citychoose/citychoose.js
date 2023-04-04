@@ -58,7 +58,7 @@ Page({
     let res = await request({
       apiType: 'geo',
       url: '/v2/city/lookup',
-      isHideErrorTip:true,
+      isHideErrorTip: true,
       data: {
         location: value,
       },
@@ -78,7 +78,7 @@ Page({
   choose(e) {
     const { lon, lat, name } = e.currentTarget.dataset
 
-    let location = `${Number(lon).toFixed(2)},${Number(lat).toFixed(2)}`
+    let location = `${Number(lon)},${Number(lat)}`
     let pages = getCurrentPages()
     let len = pages.length
     let weatherPage = pages[len - 2]
@@ -92,7 +92,7 @@ Page({
         console.log(name)
       }
 
-      weatherPage.init({}, () => {
+      weatherPage.initLocation({}, () => {
         wx.navigateBack({})
       })
     }
