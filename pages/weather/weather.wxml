@@ -65,7 +65,7 @@
         <view class="comfort-text">{{weatherData.comfText}}</view>
         <view class="rainfall-handle" bindtap='getRainfall'>
           <!-- {{rainfall}} -->
-          {{isRainfall?weatherData.rainfall:'查看未来两小时降雨预报>'}}
+          {{isRainfall? rainfall:'查看未来两小时降雨预报>'}}
         </view>
         <!-- <view>icon{{rainfall}}></view> -->
       </view>

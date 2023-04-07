@@ -10,6 +10,7 @@ page,
 
 .weui-tab__content {
   padding-top: 15px;
+  display: block;
 }
 
 .table {

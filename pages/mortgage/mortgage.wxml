@@ -112,7 +112,7 @@
             </view>
             <view class="btn-area">
               <button type="primary" bindtap="showDetail" disabled="{{activeIndex==2?!(commercialTotal&&gjjTotal): (activeIndex==1?!gjjTotal: !commercialTotal)}}">
-                计算
+                开始计算
               </button>
             </view>
           </view>

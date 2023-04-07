@@ -317,18 +317,7 @@ Page({
   onPullDownRefresh(res) {
     this.reloadPage()
   },
-  getCityDatas() {
-    let cityDatas = wx.getStorage({
-      key: 'cityDatas',
-      success: (res) => {
-        this.setData({
-          cityDatas: res.data,
-        })
 
-      },
-    })
-    console.log("cityDatas", cityDatas)
-  },
   openSetting() { },
 
 
