@@ -6,7 +6,7 @@
       </view>
       <view class="weui-cell__bd">
         <picker bindchange="bindCityChange" value="{{cityIndex}}" range="{{cities}}">
-          <view class="weui-select weui-select_in-select-after weui-cell__ft">{{cities[cityIndex]}}</view>
+          <view class="weui-select weui-cell__ft">{{cities[cityIndex]}}</view>
         </picker>
       </view>
     </view>

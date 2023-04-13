@@ -43,12 +43,3 @@ page,
     font-size: 24rpx;
     margin: 0 40rpx;
 }
-
-.weui-cell__bd {
-    margin-right: 75rpx
-}
-
-.weui-label {
-    white-space: nowrap;
-    font-size: 28rpx;
-}

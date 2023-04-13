@@ -1,5 +1,6 @@
 {
   "pages": [
+ 
     "pages/weather/weather",
     "pages/mortgage/mortgage",
     "pages/setting/setting",

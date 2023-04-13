@@ -15,36 +15,35 @@
             <view class="weui-cells weui-cells_after-title">
               <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 1}}">
                 <view class="weui-cell__hd">
-                  <view class="weui-label">公积金贷款(元):</view>
-                </view>
-                <view class="weui-cell__bd">
-                  <input class="weui-input" type="digit" placeholder="请输入总额" name="data1" value="{{gjjTotal}}" bindinput="gjjTotalChange"></input>
-                </view>
-                <view class="weui-cell__bd weui-cell__ft">元</view>
-              </view>
-              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 0}}">
-                <view class="weui-cell__hd">
-                  <view class="weui-label">商业贷款(元):</view>
+                  <view class="weui-label">商贷总额：</view>
                 </view>
                 <view class="weui-cell__bd">
                   <input class="weui-input" type="digit" placeholder="请输入总额" name="data0" value="{{commercialTotal}}" bindinput="commercialTotalChange"></input>
                 </view>
                 <view class="weui-cell__bd weui-cell__ft">元</view>
               </view>
-              <!-- 公积金利率 -->
-              <view class="weui-cell weui-cell_select" hidden="{{activeIndex == 1}}" data-rateIndex0="{{rateIndex0}}">
+              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 0}}">
+                <view class="weui-cell__hd">
+                  <view class="weui-label">公积金贷总额：</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" type="digit" placeholder="请输入总额" name="data1" value="{{gjjTotal}}" bindinput="gjjTotalChange"></input>
+                </view>
+                <view class="weui-cell__bd weui-cell__ft">元</view>
+              </view>
+              <view class="weui-cell weui-cell_select" hidden="{{activeIndex == 1}}">
                 <view class="weui-cell__hd weui-cell__hd_in-select-after">
-                  <view class="weui-label">公积金利率：</view>
+                  <view class="weui-label">商业贷利率：</view>
                 </view>
                 <view class="weui-cell__bd">
                   <picker bindchange="rateChange0" value="{{rateIndex0}}" range="{{ratesName[0]}}">
-                    <view class=" weui-cell__ft">
-                      {{MDI_provident_fund_loan?MDI_provident_fund_loan+'%':ratesName[0][rateIndex0]}}
+                    <view class="weui-select weui-select_in-select-after weui-cell__ft">
+                      {{MDI_commercial_loan?MDI_commercial_loan+'%':ratesName[0][rateIndex0]}}
                     </view>
                   </picker>
                 </view>
               </view>
-              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 1}}" wx:if="{{rateIndex0==ratesName[0].length-1}}">
+              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 1}}">
                 <view class="weui-cell__hd">
                   <view class="weui-label"></view>
                 </view>
@@ -53,20 +52,19 @@
                   <view class="weui-cell__bd weui-cell__ft">%</view>
                 </view>
               </view>
-              <!-- 商贷利率 -->
               <view class="weui-cell weui-cell_select" hidden="{{activeIndex == 0}}">
                 <view class="weui-cell__hd weui-cell__hd_in-select-after">
-                  <view class="weui-label">商贷利率：</view>
+                  <view class="weui-label">公积金利率：</view>
                 </view>
                 <view class="weui-cell__bd">
                   <picker bindchange="rateChange1" value="{{rateIndex1}}" range="{{ratesName[1]}}">
-                    <view class=" weui-cell__ft">
-                      {{MDI_commercial_loan?MDI_commercial_loan+'%':ratesName[1][rateIndex1]}}
+                    <view class="weui-select weui-select_in-select-after weui-cell__ft">
+                      {{MDI_provident_fund_loan?MDI_provident_fund_loan+'%':ratesName[1][rateIndex1]}}
                     </view>
                   </picker>
                 </view>
               </view>
-              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 0}}" wx:if="{{rateIndex1==ratesName[1].length-1}}">
+              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 0}}">
                 <view class="weui-cell__hd">
                   <view class="weui-label"></view>
                 </view>
@@ -81,7 +79,9 @@
                 </view>
                 <view class="weui-cell__bd">
                   <picker bindchange="yearChange" value="{{yearIndex}}" range="{{years}}">
-                    <view class=" weui-cell__ft">{{years[yearIndex]}}年</view>
+                    <view class="weui-select weui-select_in-select-after weui-cell__ft">
+                      {{years[yearIndex]}}年
+                    </view>
                   </picker>
                 </view>
               </view>
@@ -91,7 +91,9 @@
                 </view>
                 <view class="weui-cell__bd">
                   <picker bindchange="loanChange" value="{{loanIndex}}" range="{{loansType}}">
-                    <view class=" weui-cell__ft">{{loansType[loanIndex]}}</view>
+                    <view class="weui-select weui-select_in-select-after weui-cell__ft">
+                      {{loansType[loanIndex]}}
+                    </view>
                   </picker>
                 </view>
               </view>
@@ -101,7 +103,9 @@
                 </view>
                 <view class="weui-cell__bd">
                   <picker bindchange="percentChange" value="{{percentIndex}}" range="{{percentArr}}">
-                    <view class=" weui-cell__ft">{{percentArr[percentIndex]}}成</view>
+                    <view class="weui-select weui-select_in-select-after weui-cell__ft">
+                      {{percentArr[percentIndex]}}成
+                    </view>
                   </picker>
                 </view>
               </view>
@@ -114,19 +118,9 @@
           </view>
         </view>
         <view class='footer'>
-          等额本息还款：把按揭贷款的本金总额与利息总额相加，然后平均分摊到还款期限的每个月中。作为还款人，每个月还给银行固定金额，但每月还款额中的本金比重逐月递增、利息比重逐月递减。
-          
-          等额本金还款：将本金分摊到每个月内,同时付清上一交易日至本次还款日之间的利息。这种还款方式相对等额本息而言,总的利息支出较低,但是前期支付的本金和利息较多,还款负担逐月递减。
-         
-          2023年公积金贷款最高额度说明（具体规定参考地方房管局文件）
-         
-          北京：市管公积金贷款最高120万元，国管公积金最高贷款120万元
-          
-          上海：个人公积金贷款最高60万元，家庭最高贷款120万元
-          
-          广州：个人公积金贷款最高60万元，夫妻双方最高贷款100万元
-          
-          成都：个人公积金贷款最高40万元，家庭公积金贷款最高70万元，成都公积金贷款额度为个人缴存余额20倍
+          七成房贷作为国家给予每个人一生一次最大的福利，正确的使用方式是：
+                30年等额本息商业贷款，能贷多少贷多少！
+                优先还商贷，然后还公积金贷！
         </view>
       </view>
     </view>
