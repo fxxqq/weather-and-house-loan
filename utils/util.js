@@ -13,33 +13,14 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-const getOneWord = (code) => {
-  const list = [
-    '生活是天气，有阴有晴有风雨',
-    '心怀感恩，幸福常在',
-    '心累的时候，换个心情看世界',
-    '想获得人生的金子，就必须淘尽生活的沙烁',
-    '因为有明天，今天永远只是起跑线',
-    '只要心情是晴朗的，人生就没有雨天',
-    '有你的城市下雨也美丽',
-    '雨划过我窗前，玻璃也在流眼泪',
-    '天空澄碧，纤云不染',
-    '人生，不要被安逸所控制',
-    '在受伤的时候，也能浅浅的微笑',
-    '不抱怨过去，不迷茫未来，只感恩现在',
-    '生活向前，你向阳光',
-    '在阳光中我学会欢笑，在阴云中我学会坚强'
-  ]
-  let index = Math.floor(Math.random() * list.length)
-  return list[index] ? list[index] : list[0]
-}
-let isEmptyObject = (obj) => {
+
+const isEmptyObject = (obj) => {
   for (let i in obj) {
     return false
   }
   return true
 }
-let formatDate = (nDate, date) => {
+const formatDate = (nDate, date) => {
   if (isNaN(nDate.getTime())) {
     // 不是时间格式
     return '--'
@@ -64,10 +45,10 @@ let formatDate = (nDate, date) => {
   }
   return date
 }
- 
+
 // 比较版本号：left > right 1, left < right -1, left == right 0
 // 用途：旧版本不执行写入、删除 日历操作
-let cmpVersion = (left, right) => {
+const cmpVersion = (left, right) => {
   if (typeof left + typeof right !== 'stringstring') {
     return false
   }
@@ -85,11 +66,27 @@ let cmpVersion = (left, right) => {
   return 0
 }
 
-
+const getQueryParams = (url) => {
+  console.log("url",url)
+  const sUrl = url.split('?');
+  // 取最后一位，兼容全链接有？和纯参数无？
+  const sParams = sUrl[sUrl.length - 1];
+  const arr = sParams.split('&'); // ['a=1', 'b=2']
+  const result = {};
+  arr.forEach((item) => {
+    const keyVal = item.split('=');
+    // key值
+    const key = keyVal.shift();
+    // value值，兼容参数没encode时有=，例如'a=b=1' => [a, b, 1] => key: a，value: b=1
+    const value = decodeURIComponent(keyVal.join('='));
+    result[key] = value;
+  })
+  return result;
+}
 module.exports = {
   formatTime,
   formatDate,
-  getOneWord,
   isEmptyObject,
   cmpVersion,
+  getQueryParams
 }

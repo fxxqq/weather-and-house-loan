@@ -16,17 +16,18 @@
       </view>
       <view class='info today'>
         <view class="today-header">
-          <view class='location' bindtap='toCitychoose'>{{locationName}}</view>
-          <view class='time'>
+          <view class='location' bindtap='toCitychoose'>{{weatherData.locationName}}</view>
+          <view class='time' bindtap="refresh">
             {{weatherData.obsTimeFormat}} 更新
             <image class="icon-refresh" src="/image/icon/icon-refresh.png" />
           </view>
         </view>
-        <view class="today-tip" wx:if="{{warning.text}}" bindtap="openWarningToast">
-          <view class="subscribe-button">{{warning.title}}</view>
+        <view class="today-tip" wx:if="{{weatherData.warning&&weatherData.warning.length}}" bindtap="openWarningToast">
+          <view class="subscribe-button">{{weatherData.warning.length}}条预警信息</view>
         </view>
         <!-- <image class="weather-city-image" src="{{'https://a.hecdn.net/img/common/icon/202106d/154.png'}}" /> -->
         <view class='temp num' decode='true'>
+          <image class="weather-today-image" src="{{'../../image/weather-icon/'+weatherData.icon+'.png'}}" />
           {{weatherData.temp || '-'}}
           <text class="unit">℃</text>
         </view>
@@ -62,17 +63,15 @@
             <view>{{weatherData.vis}}km</view>
           </view>
         </view>
-        <view class="comfort-text">{{weatherData.comfText}}</view>
         <view class="rainfall-handle" bindtap='getRainfall'>
-          <!-- {{rainfall}} -->
-          {{isRainfall? rainfall:'查看未来两小时降雨预报>'}}
+          {{isRainfall? weatherData.rainfall:'查看未来两小时降雨预报>'}}
         </view>
-        <!-- <view>icon{{rainfall}}></view> -->
+        <view class="comfort-text">{{weatherData.comfText}}</view>
       </view>
     </view>
     <hourly24 wx:if='{{location}}' location="{{location}}" />
     <daily7 wx:if='{{location}}' location="{{location}}" />
-    <view class="daily-30-text">
+    <view class="daily-30-text" catchtap='goToDay30'>
       30日天气预报
       <image class='more' src='/image/icon/icon-arrow.png'></image>
     </view>
@@ -80,12 +79,9 @@
     <view class='toast' wx:if='{{warningShow}}'>
       <view class='mask' catchtap='hideWarningToast'></view>
       <view class='wrapper'>
-        <view class='box' wx:if="{{warning}}">
-          <view class='t'>{{warning.title}}</view>
-          <view class='content'>{{warning.text}}</view>
-        </view>
-        <view class='box' wx:else>
-          <view class='content'>当前无预警</view>
+        <view class='box' wx:for="{{weatherData.warning}}" wx:key="index">
+          <view class='t'>{{item.title}}</view>
+          <view class='content'>{{item.text}}</view>
         </view>
       </view>
     </view>

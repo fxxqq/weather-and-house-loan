@@ -1,5 +1,3 @@
-let staticData = require('../../data/staticData.js')
-
 import request from '../../service/request'
 Page({
   data: {
@@ -9,6 +7,67 @@ Page({
     showItems: null,
     inputText: '',
     hotCities: [],
+
+    popularCities: [{
+      name: '北京',
+      lat: "39.90499",
+      lon: "116.40529",
+    }, {
+      name: '上海',
+      lat: "31.23171",
+      lon: "121.47264",
+    },
+    {
+      name: '广州',
+      lat: "23.12518",
+      lon: "113.28064",
+    },
+    {
+      name: '深圳',
+      lat: "22.54700",
+      lon: "114.08595",
+    },
+    {
+      name: '杭州',
+      lat: "30.24603",
+      lon: "120.21079",
+    },
+    {
+      name: '南京',
+      lat: "32.04155",
+      lon: "118.76741",
+    },
+
+    {
+      name: '天津',
+      lat: "39.12560",
+      lon: "117.19019",
+    },
+    {
+      name: '武汉',
+      lat: "30.58435",
+      lon: "114.29857",
+    },
+    {
+      name: '西安',
+      lat: "34.34321",
+      lon: "108.93965",
+    },
+    {
+      name: '苏州',
+      lat: "31.29938",
+      lon: "120.61958",
+    },
+    {
+      name: '郑州',
+      lat: "34.75798",
+      lon: "113.66541",
+    },
+    {
+      name: '重庆',
+      lat: "29.56376",
+      lon: "106.55046",
+    }]
   },
   cancel() {
     this.setData({
@@ -29,31 +88,7 @@ Page({
     }
 
   },
-  // 按照字母顺序生成需要的数据格式
-  getSortedAreaObj(areas) {
-    // let areas = staticData.areas
-    areas = areas.sort((a, b) => {
-      if (a.letter > b.letter) {
-        return 1
-      }
-      if (a.letter < b.letter) {
-        return -1
-      }
-      return 0
-    })
-    let obj = {}
-    for (let i = 0, len = areas.length; i < len; i++) {
-      let item = areas[i]
-      delete item.districts
-      let letter = item.letter
-      if (!obj[letter]) {
-        obj[letter] = []
-      }
-      obj[letter].push(item)
-    }
-    // 返回一个对象，直接用 wx:for 来遍历对象，index 为 key，item 为 value，item 是一个数组
-    return obj
-  },
+
   async lookup(value) {
     let res = await request({
       apiType: 'geo',
@@ -76,6 +111,7 @@ Page({
 
   },
   choose(e) {
+    console.log('e', e)
     const { lon, lat, name } = e.currentTarget.dataset
 
     let location = `${Number(lon)},${Number(lat)}`
@@ -88,11 +124,8 @@ Page({
         wx.navigateBack({})
       })
     } else {
-      if (name) {
-        console.log(name)
-      }
 
-      weatherPage.initLocation({}, () => {
+      weatherPage.initLocation(() => {
         wx.navigateBack({})
       })
     }
@@ -103,17 +136,24 @@ Page({
       apiType: 'geo',
       url: '/v2/city/top',
     })
-
+    let hcList = []
+    res.topCityList.map(item => {
+      console.log(item.name, this.data.popularCities.includes(item.name))
+      if (!this.data.popularCities.includes(item.name)) {
+        hcList.push(item)
+      }
+    })
+    console.log("hcList", hcList)
     if (res.code === '200') {
       this.setData({
-        hotCities: res.topCityList
+        hotCities: hcList
       })
 
     }
   },
   onLoad() {
     this.getHotCities()
-    let cities = this.getSortedAreaObj(staticData.cities || [])
+    let cities = []
     this.setData({
       cities,
       showItems: cities,

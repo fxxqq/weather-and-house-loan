@@ -1,0 +1,18 @@
+<view class="page">
+    <view class="page__bd days-30-page">
+        <view class="week-list">
+            <view class="week-list-item" wx:for="{{weekList}}" wx:key="index">{{item}}</view>
+        </view>
+        <view class="day-30-list">
+            <view class="day-list-item {{item.day?'bg':'none'}}" wx:for="{{daily30Datas}}" wx:key="day">
+                <view class="day-list-item-header" wx:if="{{item.day}}">
+                    <view wx:if="{{item}}">{{item.day}}</view>
+                    <image class="weather-icon" src="{{'../../../image/weather-icon/'+item.iconDay+'.png'}}" />
+                </view>
+                <view class="day-list-item-body" wx:if="{{item.day}}">
+                    {{item.tempMax}}°~ {{item.tempMin}}°
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

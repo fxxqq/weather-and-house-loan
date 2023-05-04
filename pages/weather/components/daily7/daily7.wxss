@@ -49,3 +49,8 @@
     color: rgba(255, 255, 255, 0.54);
     text-align: center;
 }
+
+.day-7-item-icon {
+    width: 48rpx;
+    height: 48rpx;
+}

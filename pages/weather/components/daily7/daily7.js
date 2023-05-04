@@ -7,7 +7,13 @@ Component({
     properties: {
         location: {
             type: String,
-            value: ''
+            value: '',
+            observer(val) {
+                if (val) {
+                    let nowTimeDaily7 = +new Date()
+                    this.getDaily(nowTimeDaily7)
+                }
+            }
         }
     },
     lifetimes: {
@@ -51,7 +57,7 @@ Component({
                 url: `/v7/weather/${day}d`,
                 data: {
                     location: this.data.location,
-                    type: '7',
+                
                 },
             })
             dailyRes.daily.map((item, index) => {

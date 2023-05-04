@@ -256,6 +256,7 @@ page {
   color: #333;
   width: 60%;
   height: 400rpx;
+  overflow: scroll;
   border-radius: 14rpx;
   padding: 46rpx 28rpx;
 }
@@ -337,7 +338,10 @@ page {
   background-color: #D94371;
 }
 
-
+.weather-today-image {
+  width: 80rpx;
+  height: 80rpx;
+}
 
 
 
@@ -412,53 +416,17 @@ page {
 
 
 
-.guide .guides {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  font-size: 24rpx;
-  padding-top: 20rpx;
-  /* border-bottom: 1rpx solid rgba(240, 240, 240, .4); */
-  background: rgba(0, 0, 0, .6);
-  margin-bottom: 20rpx;
-  overflow-x: scroll;
-}
 
-.guide .title,
-.hourly .title {
-  border-bottom: 1rpx solid rgba(250, 250, 250, .2);
-  font-size: 24rpx;
-  height: 70rpx;
-  line-height: 70rpx;
-  text-align: center;
-}
 
-.guide .item {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 170rpx;
-  flex-shrink: 0;
-}
 
-.guide image {
-  width: 44rpx;
-}
 
-.guide .i {
-  padding-bottom: 20rpx;
-}
-
-.guide .i.weather,
 .hour .weather {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.guide .i image,
+
 .hour .weather image {
   width: 40rpx;
   margin-left: 4rpx;
@@ -520,64 +488,4 @@ page {
 .details .detail:nth-child(n+9),
 .hour .detail:nth-child(n+9) {
   border-bottom: none;
-}
-
-
-
-
-
-
-
-.menus .menu,
-.menus .share {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  position: fixed;
-  z-index: 100;
-  bottom: 150rpx;
-  right: 70rpx;
-  opacity: 0;
-}
-
-.menus .share {
-  background: rgba(0, 0, 0, 0);
-}
-
-.menus .main {
-  opacity: 1;
-}
-
-/* 打开设置页面 button */
-.openSettingButton {
-  position: fixed;
-  z-index: 102;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, .5);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.openSettingButton image {
-  position: relative;
-  width: 128rpx;
-  height: 128rpx;
-  z-index: 2;
-}
-
-.openSettingButton button {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  z-index: 3;
 }

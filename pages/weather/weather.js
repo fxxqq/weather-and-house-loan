@@ -10,7 +10,7 @@ Page({
     weatherIconUrl: globalData.weatherIconUrl,
     comfText: '',
     rainfall: '',
-    isRainfall: false,
+    isRainfall: true,
     warning: null,
     warningShow: false,
     // 是否切换了城市
@@ -36,7 +36,7 @@ Page({
 
     }
   },
-  initLocation() {
+  initLocation(callback) {
     this.setData({
       located: true,
     })
@@ -74,6 +74,7 @@ Page({
         this.getLocationFail(res)
       }
     })
+    callback && callback()
   },
   reloadWeather() {
     if (this.data.located) {
@@ -86,9 +87,6 @@ Page({
     }
   },
   reloadPage() {
-
-
-
     this.reloadWeather()
   },
 
@@ -102,6 +100,7 @@ Page({
     if (val) {
       this.setData({
         located: false,
+        location: val,
       })
 
       this.getWeatherRefresh(val)
@@ -112,13 +111,16 @@ Page({
 
   getWeatherRefresh(location) {
     console.log("location", location)
+    
+    wx.setStorageSync("location", location)
     this.setData({ location }, async () => {
       Promise.all([
         await this.getLocationCity(),
         await this.getWeatherNow(),
         await this.indiceServer(),
         await this.airServer(),
-        await this.warningServer()
+        await this.warningServer(),
+        await this.minutelyServer()
       ]).then(data => {
         console.log("all-data", data)
         let cacheData = wx.getStorageSync('cache-data') ? JSON.parse(wx.getStorageSync('cache-data')) : null;
@@ -139,11 +141,10 @@ Page({
           weatherData: cacheData
         })
       })
-      if (this.data.isRainfall) {
-        this.minutelyServer()
-      }
+      // if (this.data.isRainfall) {
+      //   this.minutelyServer()
+      // }
     })
-
   },
   // wx.openSetting 要废弃，button open-type openSetting 2.0.7 后支持
   // 使用 wx.canIUse('openSetting') 都会返回 true，这里判断版本号区分
@@ -194,9 +195,9 @@ Page({
         location: this.data.location,
       },
     })
-    console.log("getLocationCity", res.location[0].name)
+    console.log("getLocationCity", res.location[0])
     if (res.code === '200') {
-      locationName = `${res.location[0].adm1} ${res.location[0].name}`
+      locationName = `${res.location[0].adm1 || ''} ${res.location[0].adm2 || ''}${res.location[0].name}`
       this.setData({
         locationName
       })
@@ -275,7 +276,9 @@ Page({
         rainfall: minutelyRes.summary
       })
     }
-
+    return {
+      rainfall: minutelyRes.summary
+    }
   },
   async warningServer(cb) {
     let warning
@@ -288,8 +291,7 @@ Page({
     })
     cb && cb()
     if (warningRes.code === '200') {
-      warning = warningRes.warning && warningRes.warning.length ? warningRes.warning[0] : null
-
+      warning = warningRes.warning && warningRes.warning.length ? warningRes.warning : null
     }
     return {
       warning
@@ -389,16 +391,23 @@ Page({
     })
   },
   openWarningToast() {
-    this.warningServer(() => {
-      this.setData({
-        warningShow: true
-      })
+
+    this.setData({
+      warningShow: true
     })
 
   },
   hideWarningToast() {
     this.setData({
       warningShow: false
+    })
+  },
+  refresh() {
+    this.getWeatherRefresh(this.data.location)
+  },
+  goToDay30() {
+    wx.navigateTo({
+      url: '/pages/weather/days30/days30?location=' + this.data.location
     })
   }
 })

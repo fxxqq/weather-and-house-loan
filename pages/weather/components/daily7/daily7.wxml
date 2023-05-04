@@ -5,6 +5,7 @@
         <view class='item' wx:for='{{daily7Datas}}' wx:key='index'>
             <view class='date i'>{{item.fxDateFormat}}</view>
             <view class='temperature i'>{{item.tempMin}}~{{item.tempMax}}℃</view>
+            <image wx:if="{{item.iconDay}}" class="day-7-item-icon" src="{{'../../../../image/weather-icon/'+item.iconDay+'.png'}}" />
             <view class='weather i'>
                 {{item.textDay===item.textNight?item.textDay:item.textDay+'转'+item.textNight}}
                 <!-- <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image> -->

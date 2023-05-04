@@ -32,3 +32,8 @@
     color: rgba(0, 0, 0, 0.5);
     font-size: 24rpx;
 }
+
+.hourly-24-item-icon {
+    width: 48rpx;
+    height: 48rpx;
+}

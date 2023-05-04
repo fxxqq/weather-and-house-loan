@@ -9,6 +9,7 @@
                 <text>{{item.text}}</text>
                 <!-- <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image> -->
             </view>
+            <image wx:if="{{item.icon}}" class="hourly-24-item-icon" src="{{'../../../../image/weather-icon/'+item.icon+'.png'}}" />
             <view class='wind i'>{{item.windDir}}</view>
             <view class='wind i'>{{item.windScale}}级</view>
         </view>

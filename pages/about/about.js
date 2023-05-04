@@ -3,8 +3,8 @@ Page({
   data: {
     // projectAddress: 'https://github.com/myvin/quietweather',
     // github: 'https://github.com/myvin',
-    email: '383755537@qq.com',
-    qq: '383755537',
+    email: '188105274@qq.com',
+    qq: '188105274',
     swiperHeight: 'auto',
     bannerImgList: [
       {

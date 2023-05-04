@@ -4,8 +4,11 @@ import { httpUrl, errCodeArr, errMsgMap, freeUrl, geoapiUrl } from '../utils/con
 import { privateKey, freeKey } from '../utils/private-key'
 import { isObject } from '../utils/type'
 import { getNetworkType } from '../utils/system'
-const isFree = true //是否使用免费开发api
+
 export default function request(options, finishCb) {
+    let isFree = true //是否使用免费开发api
+
+
     return new Promise(async (resolve, reject) => {
         const networkRes = await getNetworkType()
         if (networkRes.networkType === 'none') {
@@ -39,8 +42,12 @@ export default function request(options, finishCb) {
             mask = false,            // 是否开启mask
             loading = false,          // 是否loading
             timeout = 8000,          // 超时时间
-            hideLoadingTime = 500    // 多少毫秒隐藏loading
+            hideLoadingTime = 500,   // 多少毫秒隐藏loading
+            isVip = false
         } = options
+        if (isVip) {
+            isFree = false
+        }
         const tHeader = {
             // 'cookie': token,
             ...header
@@ -88,7 +95,7 @@ export default function request(options, finishCb) {
                     return Promise.reject(res)
                 }
 
-               
+
 
                 resolve(data)
             },

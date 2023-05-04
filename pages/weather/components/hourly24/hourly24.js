@@ -5,7 +5,13 @@ Component({
     properties: {
         location: {
             type: String,
-            value: ''
+            value: '',
+            observer(val) {
+                if (val) {
+                    let nowTimeHourly24 = +new Date()
+                    this.getHourly(nowTimeHourly24)
+                }
+            }
         }
     },
     lifetimes: {
@@ -16,10 +22,10 @@ Component({
                 if (nowTimeHourly24 - cacheData.nowTimeHourly24 < 5 * 60 * 1000) {
                     let startRainTime
                     cacheData.hourly24Datas.map((item, index) => {
-                        if (item.text.indexOf('雨') > -1 && startRainTime) {
+                        if (item.text.indexOf('雨') > -1 && !startRainTime) {
                             startRainTime = formatDate(new Date(item.fxTime), "hh:mm")
                         }
-                      
+
                         cacheData.hourly24Datas[index] = {
                             fxTimeFormat: formatDate(new Date(item.fxTime), 'hh:mm'),
                             text: item.text,
@@ -56,15 +62,15 @@ Component({
                     location: this.data.location,
                 },
             })
-            let startRainTime
+            let startRainTimeFormat
             hourly24DatasRes.hourly.map(item => {
-                if (item.text.indexOf('雨') > -1 && startRainTime) {
-                    startRainTime = formatDate(new Date(item.fxTime), "hh:mm")
+                if (item.text.indexOf('雨') > -1 && startRainTimeFormat) {
+                    startRainTimeFormat = formatDate(new Date(item.fxTime), "hh:mm")
                 }
                 item.fxTimeFormat = formatDate(new Date(item.fxTime), 'hh:mm')
             })
             this.setData({
-                startRainTime: startRainTime,
+                startRainTime: startRainTimeFormat,
                 hourly24Datas: hourly24DatasRes.hourly || []
             })
             let cacheData = wx.getStorageSync('cache-data') ? JSON.parse(wx.getStorageSync('cache-data')) : null;

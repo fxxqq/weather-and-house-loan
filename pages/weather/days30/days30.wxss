@@ -1,0 +1,65 @@
+.days-30-page {
+    background-image: radial-gradient(circle farthest-side at 10% 90%, #FFE8EA, #EDF3FF 70%, #EDF2FB);
+    padding: 20rpx;
+    overflow: hidden;
+}
+
+.week-list {
+    display: flex;
+    width: 100%;
+    margin-bottom: 30rpx;
+
+}
+
+.week-list-item {
+    width: 13%;
+    text-align: center;
+    margin-right: 1.5%;
+}
+
+.day-30-list {
+    width: 100%;
+    flex-wrap: wrap;
+
+    text-align: center;
+}
+
+.day-list-item {
+    width: 13%;
+    height: 120rpx;
+    font-size: 24rpx;
+    margin: 5px auto;
+    margin-right: 1.5%;
+    text-align: center;
+    float: left;
+    background: #fff;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.day-list-item.none {
+    background: transparent;
+}
+
+.day-list-item:nth-child(7n+7) {
+    margin-right: 0;
+}
+
+.weather-icon {
+    width: 50rpx;
+    height: 50rpx;
+    margin-left: 5rpx;
+}
+
+.day-list-item-header {
+    display: flex;
+    font-size: 30rpx;
+    line-height: 50rpx;
+    justify-content: space-around;
+    margin-top: 10rpx;
+}
+
+.day-list-item-body {
+    font-size: 24rpx;
+    margin-top: 20rpx;
+}

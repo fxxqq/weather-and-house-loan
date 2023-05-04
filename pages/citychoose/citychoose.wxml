@@ -10,23 +10,21 @@
   </view>
   <view class='hot'>
     <view class='title'>热门城市</view>
-    北京 上海 广州 深圳 杭州 南京 天津 武汉 西安 苏州 郑州 重庆
     <view class='cities'>
-      <view class='item active' catchtap='choose'>
+      <view class='item active' catchtap='choose' >
         <image class='icon' src='/image/icon/icon-fixed-position.png'></image>
         <view>当前定位</view>
+      </view>
+      <view class='item' hover-class='active' catchtap='choose' wx:for="{{popularCities}}" wx:key='index' data-lon='{{item.lon}}' data-lat='{{item.lat}}'>
+        {{item.name}}
       </view>
       <view class='item' hover-class='active' catchtap='choose' wx:for='{{hotCities}}' wx:key='index' data-lon='{{item.lon}}' data-lat='{{item.lat}}'>
         {{item.name}}
       </view>
     </view>
-    <view class='title'>猜你想找</view>
+    <view class='title'>历史查找</view>
     <view class='cities'>
-      <!-- <view class='item active' catchtap='choose'>
-        <image class='icon' src='/image/icon/icon-fixed-position.png'></image>
-        <view>当前定位</view>
-      </view> -->
-      <view class='item' hover-class='active' catchtap='choose' wx:for='{{hotCities}}' wx:key='index' data-lon='{{item.lon}}' data-lat='{{item.lat}}'>
+      <view class='item' hover-class='active' catchtap='choose' wx:for='{{hisCities}}' wx:key='index' data-lon='{{item.lon}}' data-lat='{{item.lat}}'>
         {{item.name}}
       </view>
     </view>
