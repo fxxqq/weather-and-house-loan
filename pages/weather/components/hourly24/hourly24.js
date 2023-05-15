@@ -1,5 +1,35 @@
 import { formatDate } from '../../../../utils/util'
 import request from '../../../../service/request'
+import * as echarts from '../../../components/ec-canvas/echarts' // 或者从本地引入自定义构建的 echarts
+function initChart(canvas, width, height, dpr) {
+    console.log(canvas, width, height, dpr)
+
+    const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr // 像素
+    });
+    canvas.setChart(chart);
+
+    var option = {
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320, 820, 932, 901, 934, 1290, 1330, 1320, 820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line'
+        }]
+
+
+    };
+    chart.setOption(option);
+    return chart;
+}
+
 
 Component({
     properties: {
@@ -20,10 +50,10 @@ Component({
             let nowTimeHourly24 = +new Date()
             if (cacheData && cacheData.hourly24Datas) {
                 if (nowTimeHourly24 - cacheData.nowTimeHourly24 < 5 * 60 * 1000) {
-                    let startRainTime
+                    let startRainTimeFormat = ''
                     cacheData.hourly24Datas.map((item, index) => {
-                        if (item.text.indexOf('雨') > -1 && !startRainTime) {
-                            startRainTime = formatDate(new Date(item.fxTime), "hh:mm")
+                        if (item.text.indexOf('雨') > -1 && !startRainTimeFormat) {
+                            startRainTimeFormat = getDayName(item.fxTime) + formatDate(new Date(item.fxTime), "hh:mm")
                         }
 
                         cacheData.hourly24Datas[index] = {
@@ -35,7 +65,7 @@ Component({
                         }
                     })
                     this.setData({
-                        startRainTime,
+                        startRainTime: startRainTimeFormat,
                         hourly24Datas: cacheData.hourly24Datas
                     })
                 } else {
@@ -51,8 +81,12 @@ Component({
     },
     data: {
         hourly24Datas: [],
-        startRainTime: ''
+        startRainTime: '',
+        ec: {
+            onInit: initChart
+        }
     },
+
     methods: {
         async getHourly(nowTimeHourly24, hour = 24) {
             let hourly24DatasRes = await request({
@@ -62,10 +96,10 @@ Component({
                     location: this.data.location,
                 },
             })
-            let startRainTimeFormat
+            let startRainTimeFormat = ''
             hourly24DatasRes.hourly.map(item => {
-                if (item.text.indexOf('雨') > -1 && startRainTimeFormat) {
-                    startRainTimeFormat = formatDate(new Date(item.fxTime), "hh:mm")
+                if (item.text.indexOf('雨') > -1 && !startRainTimeFormat) {
+                    startRainTimeFormat = getDayName(item.fxTime) + formatDate(new Date(item.fxTime), "hh:mm")
                 }
                 item.fxTimeFormat = formatDate(new Date(item.fxTime), 'hh:mm')
             })

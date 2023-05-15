@@ -10,6 +10,11 @@
     overflow-x: scroll;
 }
 
+.hourly .title {
+    margin-left: 40rpx;
+    margin-top: 20rpx;
+}
+
 .hourly .hourlys .item {
     display: flex;
     flex-direction: column;
@@ -36,4 +41,16 @@
 .hourly-24-item-icon {
     width: 48rpx;
     height: 48rpx;
+}
+
+.hourly-line-chart {
+ 
+    height: 200rpx;
+    display: block;
+}
+
+ec-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
 }

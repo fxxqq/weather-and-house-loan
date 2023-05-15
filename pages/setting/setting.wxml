@@ -16,14 +16,6 @@
           <view>打开顶部城市天气快捷搜索</view>
           <switch color='#3cc51f' checked='{{!setting.hiddenSearch}}' bindchange='switchChange' data-switchparam='hiddenSearch'></switch>
         </view>
-        <view class='item'>
-          <view>实时显示降雨量</view>
-          <switch color='#3cc51f' checked='{{!setting.hiddenIndex}}' bindchange='switchChange' data-switchparam='hiddenIndex'></switch>
-        </view>
-        <view class='item'>
-          <view>实时显示天气预警信息</view>
-          <switch color='#3cc51f' checked='{{!setting.hiddenIndex}}' bindchange='switchChange' data-switchparam='hiddenIndex'></switch>
-        </view>
       </view>
     </view>
     <!-- 检查更新 -->

@@ -1,15 +1,19 @@
 <view class='daily' wx:if='{{daily7Datas.length}}'>
     <view class='title'>7 天预报</view>
-    <ec-canvas class="daily-line-chart-box" id="chartLineDaily" canvas-id="daily-line-chart" ec="{{ec}}"></ec-canvas>
     <view class='dailys'>
         <view class='item' wx:for='{{daily7Datas}}' wx:key='index'>
             <view class='date i'>{{item.fxDateFormat}}</view>
-            <view class='temperature i'>{{item.tempMin}}~{{item.tempMax}}℃</view>
+            <view class='temperature i'>{{item.tempMax}}/{{item.tempMin}}℃</view>
             <image wx:if="{{item.iconDay}}" class="day-7-item-icon" src="{{'../../../../image/weather-icon/'+item.iconDay+'.png'}}" />
+            <image wx:if="{{item.iconNight}}" class="day-7-item-icon" src="{{'../../../../image/weather-icon/'+item.iconNight+'.png'}}" />
             <view class='weather i'>
                 {{item.textDay===item.textNight?item.textDay:item.textDay+'转'+item.textNight}}
                 <!-- <image mode='widthFix' src='{{weatherIconUrl}}{{item.cond_code_d}}.png'></image> -->
             </view>
+            <!-- <view>
+                {{item.windDirDay===item.windDirNight?item.windDirDay:item.windDirDay+'转'+item.windDirNight}}
+            </view> -->
+            <!-- <ec-canvas class="hourly-line-chart" id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas> -->
         </view>
     </view>
 </view>

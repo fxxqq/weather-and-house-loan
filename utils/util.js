@@ -67,7 +67,7 @@ const cmpVersion = (left, right) => {
 }
 
 const getQueryParams = (url) => {
-  console.log("url",url)
+  console.log("url", url)
   const sUrl = url.split('?');
   // 取最后一位，兼容全链接有？和纯参数无？
   const sParams = sUrl[sUrl.length - 1];
@@ -83,10 +83,34 @@ const getQueryParams = (url) => {
   })
   return result;
 }
+
+const getDayName = (d) => {
+  var td = new Date();
+  td = new Date(td.getFullYear(), td.getMonth(), td.getDate());
+  var od = new Date(d);
+  od = new Date(od.getFullYear(), od.getMonth(), od.getDate());
+  var xc = (od - td) / 1000 / 60 / 60 / 24;
+  if (xc < -2) {
+    return -xc + "天前";
+  } else if (xc < -1) {
+    return "前天";
+  } else if (xc < 0) {
+    return "昨天";
+  } else if (xc == 0) {
+    return "今天";
+  } else if (xc < 2) {
+    return "明天";
+  } else if (xc < 3) {
+    return "后天";
+  } else {
+    return xc + "天后";
+  }
+}
 module.exports = {
   formatTime,
   formatDate,
   isEmptyObject,
   cmpVersion,
-  getQueryParams
+  getQueryParams,
+  getDayName
 }

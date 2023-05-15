@@ -308,6 +308,13 @@ page {
   height: 24rpx;
 }
 
+.air-now {
+  white-space: nowrap;
+  border-radius: 20rpx;
+  padding: 0 20rpx;
+
+}
+
 .air-tag--1 {
   color: white;
   background-color: #95B359;
@@ -342,7 +349,6 @@ page {
   width: 80rpx;
   height: 80rpx;
 }
-
 
 
 

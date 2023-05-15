@@ -34,7 +34,9 @@
         <view class="today-weather-air">
           <view class='weather'>{{weatherData.text || '--'}}</view>
           <view class='line'></view>
-          <view class='air-now'>{{weatherData.aqi +weatherData.category}}</view>
+          <view class='air-now air-tag--{{weatherData.aqi/50}}'>
+            {{weatherData.aqi +weatherData.category}}
+          </view>
         </view>
         <view class='details current-details'>
           <view class='detail'>
