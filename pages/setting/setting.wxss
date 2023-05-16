@@ -70,13 +70,13 @@
 
 .title {
   font-size: 32rpx;
-  color: #3cc51f;
+  color: #427BFF;
   margin: 26rpx 0;
 }
 
 .subtitle {
   font-size: 28rpx;
-  color: #3cc51f;
+  color: #427BFF;
 }
 
 .toast .mask {

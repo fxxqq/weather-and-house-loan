@@ -5,3 +5,16 @@
 当天天气查询，未来两小时降雨查询，房贷月供计算
 
 <img src="./qrcode.jpg" alt="微信小程序二维码">
+
+ <!-- {
+        "pagePath": "pages/mortgage/mortgage",
+        "iconPath": "image/tab-icon/mortgage.png",
+        "selectedIconPath": "image/tab-icon/mortgage-hl.png",
+        "text": "月供计算"
+      },
+      {
+        "pagePath": "pages/wuxian-yijin/wxyj",
+        "iconPath": "image/tab-icon/wxyj.png",
+        "selectedIconPath": "image/tab-icon/wxyj-hl.png",
+        "text": "五险一金"
+      }, -->

@@ -1,6 +1,5 @@
 {
   "pages": [
-  
     "pages/weather/weather",
     "pages/mortgage/mortgage",
     "pages/setting/setting",
@@ -14,14 +13,14 @@
   ],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#1AAD19",
+    "navigationBarBackgroundColor": "#427BFF",
     "backgroundTextStyle": "dark",
     "backgroundColor": "#f8f8f8",
     "navigationBarTitleText": "天气月供查询"
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#427BFF",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
@@ -32,22 +31,10 @@
         "text": "实时天气"
       },
       {
-        "pagePath": "pages/mortgage/mortgage",
-        "iconPath": "image/tab-icon/mortgage.png",
-        "selectedIconPath": "image/tab-icon/mortgage-hl.png",
-        "text": "月供计算"
-      },
-      {
-        "pagePath": "pages/wuxian-yijin/wxyj",
-        "iconPath": "image/tab-icon/wxyj.png",
-        "selectedIconPath": "image/tab-icon/wxyj-hl.png",
-        "text": "五险一金"
-      },
-      {
         "pagePath": "pages/setting/setting",
-        "iconPath": "image/tab-icon/component.png",
-        "selectedIconPath": "image/tab-icon/component-hl.png",
-        "text": "设置中心"
+        "iconPath": "image/tab-icon/tool.png",
+        "selectedIconPath": "image/tab-icon/tool-hl.png",
+        "text": "更多工具"
       }
     ]
   },

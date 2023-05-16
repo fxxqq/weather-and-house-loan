@@ -130,7 +130,7 @@
 }
 
 .hot .item.active {
-  background: #3cc51f;
+  background: #427BFF;
   color: #fff;
 }
 

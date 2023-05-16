@@ -26,7 +26,7 @@
     width: 8rpx;
     height: 100%;
     border-radius: 4rpx;
-    background: lightgreen;
+    background: lightblue;
     animation: load1 2s ease infinite;
 }
 
@@ -35,7 +35,7 @@
     0%,
     100% {
         height: 40rpx;
-        background: lightgreen;
+        background: lightblue;
     }
 
     50% {
@@ -66,8 +66,8 @@
     height: 4rpx;
     border-radius: 2rpx;
     position: relative;
-    background: lightgreen;
-    animation: changeBgColor-lightgreen-lightblue 1.04s ease-in infinite alternate;
+    background: lightblue;
+    animation: changeBgColor-lightblue-lightblue 1.04s ease-in infinite alternate;
 }
 
 .loading-2 .loading-item {
@@ -75,16 +75,16 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: lightgreen;
+    background: lightblue;
     position: absolute;
     margin-top: -12rpx;
     margin-left: -8rpx;
-    animation: changePosition-lightgreen-lightblue 1.04s ease-in infinite alternate;
+    animation: changePosition-lightblue-lightblue 1.04s ease-in infinite alternate;
 }
 
-@keyframes changeBgColor-lightgreen-lightblue {
+@keyframes changeBgColor-lightblue-lightblue {
     0% {
-        background: lightgreen;
+        background: lightblue;
     }
 
     100% {
@@ -92,9 +92,9 @@
     }
 }
 
-@keyframes changePosition-lightgreen-lightblue {
+@keyframes changePosition-lightblue-lightblue {
     0% {
-        background: lightgreen;
+        background: lightblue;
     }
 
     100% {
@@ -114,7 +114,7 @@
     height: 100%;
     margin-right: 5rpx;
     border-radius: 50%;
-    background: lightgreen;
+    background: lightblue;
     animation: load-opacity-0-1 1.04s ease infinite;
 }
 
@@ -163,7 +163,7 @@
     width: 15rpx;
     height: 100%;
     margin-right: 5rpx;
-    background: lightgreen;
+    background: lightblue;
     animation: load-opacity-0-1 1.04s ease infinite;
 }
 
@@ -201,7 +201,7 @@
     width: 15rpx;
     height: 100%;
     margin-right: 15rpx;
-    background: lightgreen;
+    background: lightblue;
     transform-origin: right bottom;
     animation: load-opacity-1-0-transform-90 1s ease infinite;
 }
@@ -251,7 +251,7 @@
     width: 15rpx;
     height: 100%;
     margin-right: 15rpx;
-    background: lightgreen;
+    background: lightblue;
     transform-origin: right bottom;
     animation: load-opacity-1-0-transform-90 1s ease infinite;
 }
@@ -302,7 +302,7 @@
     width: 16rpx;
     height: 16rpx;
     border-radius: 50%;
-    background: lightgreen;
+    background: lightblue;
     position: absolute;
     animation: load-1-0-2 1.04s ease infinite;
 }
@@ -381,7 +381,7 @@
     width: 8rpx;
     height: 100%;
     border-radius: 4rpx;
-    background: lightgreen;
+    background: lightblue;
     animation: load-8 1.04s ease infinite;
 }
 
@@ -390,7 +390,7 @@
     0%,
     100% {
         height: 40rpx;
-        background: lightgreen;
+        background: lightblue;
     }
 
     50% {
@@ -422,7 +422,7 @@
     width: 80rpx;
     height: 80rpx;
     border-radius: 50%;
-    border: 5rpx solid lightgreen;
+    border: 5rpx solid lightblue;
     animation: turn-0-360 2s linear infinite;
 }
 
@@ -431,17 +431,17 @@
     width: 30rpx;
     height: 30rpx;
     border-radius: 50%;
-    background: lightgreen;
+    background: lightblue;
     position: absolute;
     left: 50%;
     margin-top: -15rpx;
     margin-left: -15rpx;
-    animation: changeBgColor-lightgreen-lightblue 2s linear infinite;
+    animation: changeBgColor-lightblue-lightblue 2s linear infinite;
 }
 
-@keyframes changeBgColor-lightgreen-lightblue {
+@keyframes changeBgColor-lightblue-lightblue {
     0% {
-        background: lightgreen;
+        background: lightblue;
     }
 
     100% {
@@ -452,7 +452,7 @@
 @keyframes turn-0-360 {
     0% {
         transform: rotate(0deg);
-        border-color: lightgreen;
+        border-color: lightblue;
     }
 
     100% {
@@ -474,7 +474,7 @@
     width: 100%;
     height: 100%;
     border-radius: 3rpx;
-    background: lightgreen;
+    background: lightblue;
     animation: changePosition-transform-150 4s linear infinite;
 }
 
@@ -503,7 +503,7 @@
     height: 10rpx;
     border-top-left-radius: 5rpx;
     border-bottom-left-radius: 5rpx;
-    background: lightgreen;
+    background: lightblue;
     position: absolute;
     animation: load-1-0-2 1.04s ease infinite;
 }
@@ -586,7 +586,7 @@
     width: 20rpx;
     height: 20rpx;
     border-radius: 50%;
-    background: lightgreen;
+    background: lightblue;
     position: absolute;
     left: 50%;
     margin-top: -10rpx;
