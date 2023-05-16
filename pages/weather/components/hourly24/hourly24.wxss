@@ -44,7 +44,7 @@
 }
 
 .hourly-line-chart {
- 
+
     height: 200rpx;
     display: block;
 }
@@ -53,4 +53,8 @@ ec-canvas {
     width: 100%;
     height: 100%;
     background-color: #fff;
+}
+
+.start-rain {
+    margin-left: 40rpx
 }

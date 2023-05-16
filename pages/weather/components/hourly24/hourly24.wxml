@@ -1,6 +1,6 @@
 <view class='hourly hourly-24-content' wx:if='{{hourly24Datas.length}}'>
     <view class='title'>24小时天气预报</view>
-    <view wx:if="{{startRainTime}}">{{startRainTime}}左右预计有雨</view>
+    <view class="start-rain" wx:if="{{startRainTime}}">{{startRainTime}}左右预计有雨</view>
     <scroll-view scroll-x="{{true}}" enable-passive='{{true}}'>
         <view class='hourlys'>
             <view class='item' wx:for='{{hourly24Datas}}' wx:key='index'>

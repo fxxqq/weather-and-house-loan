@@ -348,7 +348,7 @@ Page({
 
   toCitychoose() {
     wx.navigateTo({
-      url: '/pages/citychoose/citychoose',
+      url: '/pages/weather/city/city',
     })
   },
   initSetting(successFunc) {

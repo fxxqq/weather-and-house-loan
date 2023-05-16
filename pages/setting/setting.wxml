@@ -7,7 +7,7 @@
       </button>
       <input type="nickname" class="weui-input" placeholder="请输入昵称" />
     </view>
-    <view class='t'>
+    <!-- <view class='t'>
       <view class='title'>
         <view>自定义</view>
       </view>
@@ -17,7 +17,7 @@
           <switch color='#3cc51f' checked='{{!setting.hiddenSearch}}' bindchange='switchChange' data-switchparam='hiddenSearch'></switch>
         </view>
       </view>
-    </view>
+    </view> -->
     <!-- 检查更新 -->
     <view class='t'>
       <view class='title'>

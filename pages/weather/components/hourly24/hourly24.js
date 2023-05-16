@@ -1,4 +1,4 @@
-import { formatDate } from '../../../../utils/util'
+import { formatDate, getDayName } from '../../../../utils/util'
 import request from '../../../../service/request'
 import * as echarts from '../../../components/ec-canvas/echarts' // 或者从本地引入自定义构建的 echarts
 function initChart(canvas, width, height, dpr) {

@@ -11,9 +11,7 @@ Page({
         // this.dataList=
     },
 
-    init() {
-        this.getDaily()
-    },
+
     async getDaily(day = 30) {
         console.log("this", this)
         // let dailyRes = await request({
@@ -30,7 +28,7 @@ Page({
         console.log("dailyRes", dailyRes)
         let prefix = []
         if (new Date(dailyRes.daily[0].fxDate).getDay()) {
-            prefix = new Array(new Date(dailyRes.daily[0].fxDate).getDay()-1)
+            prefix = new Array(new Date(dailyRes.daily[0].fxDate).getDay() - 1)
         }
 
         dailyRes.daily.map((item, index) => {

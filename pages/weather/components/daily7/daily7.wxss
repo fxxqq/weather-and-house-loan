@@ -54,3 +54,8 @@
     width: 48rpx;
     height: 48rpx;
 }
+
+.daily .title {
+    margin-left: 40rpx;
+    margin-top: 20rpx;
+}

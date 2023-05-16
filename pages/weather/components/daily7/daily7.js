@@ -65,7 +65,6 @@ Component({
                     tempMax: item.tempMax,
                     textDay: item.textDay,
                     textNight: item.textNight
-
                 }
 
             })

@@ -1,0 +1,40 @@
+<view class='container'>
+  <view class="wrapper">
+    <view class='search'>
+      <view class="inner">
+        <image class='icon' src='/image/icon/icon-search-grey.png'></image>
+        <input value='{{inputText}}' placeholder='请输入城市名，快速查询天气信息' maxlength='20' confirm-type='搜索' bindinput='inputFilter' bindconfirm='inputFilter' bindfocus='inputFilter'></input>
+      </view>
+      <text class='cancel' catchtap='cancel'>清空</text>
+    </view>
+  </view>
+  <view class='hot'>
+    <view class='title' wx:if="{{!showItems.length}}">热门城市</view>
+    <view class='cities' wx:if="{{!showItems.length}}">
+      <view class='item active' catchtap='choose'>
+        <image class='icon' src='/image/icon/icon-fixed-position.png'></image>
+        <view>当前定位</view>
+      </view>
+      <view class='item' hover-class='active' catchtap='choose' wx:for="{{popularCities}}" wx:key='index' data-name='{{item.name}}' data-lon='{{item.lon}}' data-lat='{{item.lat}}'>
+        {{item.name}}
+      </view>
+      <view class='item' hover-class='active' catchtap='choose' wx:for='{{hotCities}}' wx:key='index' data-name='{{item.name}}' data-lon='{{item.lon}}' data-lat='{{item.lat}}'>
+        {{item.name}}
+      </view>
+    </view>
+    <view class='title history'>历史查找</view>
+    <view class='cities'>
+      <view class='item' hover-class='active' catchtap='choose' wx:for='{{hisCities}}' wx:key='index' data-name='{{item.name}}' data-lon='{{item.lon}}' data-lat='{{item.lat}}'>
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+  <view class='bottom'>
+    <view class='values' wx:key='index' wx:for='{{showItems}}'>
+      <view wx:key='index' class='value' hover-class='hover' catchtap='choose' data-name='{{item.name}}' data-lon='{{item.lon}}' data-lat='{{item.lat}}'>
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+  <view class='empty' wx:if='{{!showItems}}'>暂无城市可以选择</view>
+</view>

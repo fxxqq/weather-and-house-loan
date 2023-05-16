@@ -1,5 +1,5 @@
 <view class='daily' wx:if='{{daily7Datas.length}}'>
-    <view class='title'>7 天预报</view>
+    <view class='title'>7 天天气预报</view>
     <view class='dailys'>
         <view class='item' wx:for='{{daily7Datas}}' wx:key='index'>
             <view class='date i'>{{item.fxDateFormat}}</view>

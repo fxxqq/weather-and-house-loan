@@ -38,6 +38,7 @@
             {{weatherData.aqi +weatherData.category}}
           </view>
         </view>
+        <button class="share-button" open-type="share" type="primary">分享给好友</button>
         <view class='details current-details'>
           <view class='detail'>
             <tooltip tips="体感温度（英语：apparent temperature）是指将人体所感受到的冷暖程度，转换成同等之温度。体感温度会受到气温、风速与相对湿度的综合影响。" placement="bottom">
