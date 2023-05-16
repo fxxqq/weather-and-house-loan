@@ -7,10 +7,12 @@
   justify-content: space-between;
   min-height: 100vh;
 }
+
 swiper {
   background: #fff;
   margin-bottom: 20rpx;
 }
+
 .info {
   display: flex;
   flex-direction: column;
@@ -20,12 +22,14 @@ swiper {
   color: #333;
   padding: 60rpx 40rpx;
 }
+
 .info image {
   width: 200rpx;
   height: 200rpx;
   border-radius: 50%;
   margin-bottom: 30rpx;
 }
+
 .item {
   line-height: 2.2em;
   padding: 0 40rpx;
@@ -33,11 +37,13 @@ swiper {
   background: #fff;
   margin-bottom: 20rpx;
 }
+
 .item .title {
   font-size: 32rpx;
   color: #40a7e7;
   margin: 26rpx 0;
 }
+
 .item .i {
   display: flex;
   flex-direction: row;
@@ -46,33 +52,24 @@ swiper {
   position: relative;
   padding-bottom: 16rpx;
 }
+
 .i .icon {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 2.2em;
 }
+
 .attention .i {
   margin-left: 0;
 }
+
 .i image {
   width: 32rpx;
   height: 32rpx;
   margin-right: 20rpx;
 }
-.feedback .text {
-  position: relative;
-  z-index: 1;
-}
-.feedback .btn {
-  position: absolute;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 1;
-  opacity: 0;
-}
+
 .footer {
   display: flex;
   justify-content: space-around;
@@ -80,4 +77,11 @@ swiper {
   height: 80rpx;
   font-size: 22rpx;
   color: #333;
+}
+
+.wechat button {
+  color: #fff;
+  border: none;
+  font-size: 30rpx;
+  margin: 0;
 }

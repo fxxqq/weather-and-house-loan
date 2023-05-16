@@ -1,10 +1,10 @@
-let utils = require("../../utils/util")
+let utils = require("../../../utils/util")
 Page({
   data: {
-    // projectAddress: 'https://github.com/myvin/quietweather',
-    // github: 'https://github.com/myvin',
+    // projectAddress: 'https://github.com/fxxqq/weather-and-house-loan',
+    // github: 'https://github.com/fxxqq',
     email: '188105274@qq.com',
-    qq: '188105274',
+    qq: 'babelparser',
     swiperHeight: 'auto',
     bannerImgList: [
       {

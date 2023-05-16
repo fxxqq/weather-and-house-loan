@@ -1,5 +1,6 @@
 {
   "pages": [
+  
     "pages/weather/weather",
     "pages/mortgage/mortgage",
     "pages/setting/setting",
@@ -8,7 +9,7 @@
     "pages/wuxian-yijin/wxyj",
     "pages/mortgage/detail/detail",
     "pages/weather/city/city",
-    "pages/about/about",
+    "pages/setting/about/about",
     "pages/weather/days30/days30"
   ],
   "window": {

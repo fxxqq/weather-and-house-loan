@@ -10,7 +10,7 @@ Page({
     SDKVersion: '',
     enableUpdate: true,
     weatherPage: {},
-    avatarUrl:defaultAvatarUrl
+    avatarUrl: defaultAvatarUrl
   },
   onChooseAvatar(e) {
     const { avatarUrl } = e.detail
@@ -102,7 +102,7 @@ Page({
       })
     }
   },
-  
+
   getScreenBrightness() {
     wx.getScreenBrightness({
       success: (res) => {
@@ -140,11 +140,7 @@ Page({
       },
     })
   },
-  getsysteminfo() {
-    wx.navigateTo({
-      url: '/pages/systeminfo/systeminfo',
-    })
-  },
+
   removeStorage(e) {
     let that = this
     let datatype = e.currentTarget.dataset.type
@@ -195,6 +191,16 @@ Page({
         },
       })
     }
+  },
+  goToAbout() {
+    wx.navigateTo({
+      url: '/pages/setting/about/about'
+    })
+  },
+  goToFinance() {
+    wx.navigateTo({
+      url: '/pages/finance/finance'
+    })
   },
 
 })

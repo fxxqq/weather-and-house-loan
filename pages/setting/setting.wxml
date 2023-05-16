@@ -1,11 +1,25 @@
 <view class='setting'>
   <!-- 自定义 -->
   <view class='s'>
-    <view class='avatarInfo'>
+    <!-- <view class='avatarInfo'>
       <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
         <image class="avatar" src="{{avatarUrl}}"></image>
       </button>
       <input type="nickname" class="weui-input" placeholder="请输入昵称" />
+    </view> -->
+    <view class='t'>
+      <view class='item' bindtap='goToFinance'>
+        <view>
+          <view>金融公式计算</view>
+        </view>
+        <image class='more' src='/image/icon/icon-arrow.png'></image>
+      </view>
+      <view class='item' bindtap='goToAbout'>
+        <view>
+          <view>关于本项目</view>
+        </view>
+        <image class='more' src='/image/icon/icon-arrow.png'></image>
+      </view>
     </view>
     <!-- <view class='t'>
       <view class='title'>

@@ -1,7 +1,7 @@
 import { httpUrl, errCodeArr, errMsgMap, freeUrl, geoapiUrl } from '../utils/constant'
 // 这几个方法主要是从本次取出后台返回的token、判断变量是否是Object、返回网络情况，代码就不展示了
 // import { getToken } from '../utils/storage'
-import { privateKey, freeKey } from '../utils/private-key'
+import { privateKey, freeKeyList } from '../utils/private-key'
 import { isObject } from '../utils/type'
 import { getNetworkType } from '../utils/system'
 
@@ -55,7 +55,7 @@ export default function request(options, finishCb) {
         if (apiType) {
             data = {
                 ...data,
-                key: isFree ? freeKey : privateKey
+                key: isFree ? freeKeyList[Math.floor(Math.random() * freeKeyList.length + 0)] : privateKey
             }
         }
         if (apiType === 'qweather') {
