@@ -18,7 +18,7 @@
           <image src='/image/github.png'></image>
         </view>
         <view class='text'>
-          <view>点击即可复制github链接</view>
+          <view>github链接（点击复制）</view>
           <view>{{projectAddress}}</view>
         </view>
       </view>

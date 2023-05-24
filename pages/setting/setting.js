@@ -42,6 +42,7 @@ Page({
     this.setData({
       setting,
     })
+    console.log("this.data.",this.data)
     wx.setStorage({
       key: 'setting',
       data: setting,
@@ -63,6 +64,7 @@ Page({
   onShow() {
     let pages = getCurrentPages()
     let len = pages.length
+    console.log("pages",pages,pages.length)
     let weatherPage = pages[len - 2]
     // 不能初始化到 data 里面！！！！
     this.setData({
@@ -202,5 +204,15 @@ Page({
       url: '/pages/finance/finance'
     })
   },
+  goToMortgage() {
+    wx.navigateTo({
+      url: '/pages/mortgage/mortgage'
+    })
+  },
+  goToWxyj() {
+    wx.navigateTo({
+      url: '/pages/wuxian-yijin/wxyj'
+    })
+  }
 
 })

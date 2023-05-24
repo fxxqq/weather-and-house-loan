@@ -8,13 +8,16 @@
       <input type="nickname" class="weui-input" placeholder="请输入昵称" />
     </view> -->
     <view class='t'>
-      <view class='item' bindtap='goToFinance'>
+      <view class='title'>
+        <view>更多功能</view>
+      </view>
+      <view class='item' bindtap='goToMortgage'>
         <view>
           <view>房贷计算</view>
         </view>
         <image class='more' src='/image/icon/icon-arrow.png'></image>
       </view>
-      <view class='item' bindtap='goToFinance'>
+      <view class='item' bindtap='goToWxyj'>
         <view>
           <view>五险一金</view>
         </view>
@@ -45,7 +48,7 @@
       </view>
     </view> -->
     <!-- 检查更新 -->
-    <view class='t'>
+    <!-- <view class='t'>
       <view class='title'>
         <view>检查更新</view>
       </view>
@@ -64,7 +67,7 @@
           <switch color='#427BFF' checked='{{setting.forceUpdate}}' bindchange='switchChange' data-switchParam='forceUpdate'></switch>
         </view>
       </view>
-    </view>
+    </view> -->
     <!-- 小工具 -->
     <view class='t'>
       <view class='title'>

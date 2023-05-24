@@ -146,7 +146,7 @@ page {
   height: 44rpx;
   line-height: 44rpx;
   border-radius: 10rpx;
-  background: #1aad19;
+  background:#427BFF;
   color: #fff;
   font-size: 24rpx;
   text-align: center;
