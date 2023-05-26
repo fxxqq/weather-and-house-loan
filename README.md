@@ -19,7 +19,7 @@
 （1）注册和风天气 API
 打开和风天气开放平台注册账号
 在和风天气控制台创建你的应用，获得 API Key
-<img src="./github-image/qweather.jpg" alt="微信小程序二维码">
+<img src="./github-image/qweather.png" alt="微信小程序二维码">
 
 ```js
 //部分接口要用到收费api
