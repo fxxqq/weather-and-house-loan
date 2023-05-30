@@ -7,23 +7,34 @@ Page({
         daily30Datas: []
     },
     onLoad() {
-        this.getDaily()
-        // this.dataList=
+        let cacheData = wx.getStorageSync('cache-data') ? JSON.parse(wx.getStorageSync('cache-data')) : null;
+        let nowTimeDaily30 = +new Date()
+        if (cacheData && cacheData.daily30Datas) {
+            if (nowTimeDaily30 - cacheData.nowTimeDaily30 < 60 * 60 * 1000) {
+                this.setData({
+                    daily30Datas: cacheData.daily30Datas
+                })
+            } else {
+                this.getDaily(nowTimeDaily30)
+            }
+        } else {
+            this.getDaily(nowTimeDaily30)
+        }
     },
 
 
-    async getDaily(day = 30) {
+    async getDaily(nowTimeDaily30, day = 30) {
         console.log("this", this)
-        // let dailyRes = await request({
-        //     apiType: 'qweather',
-        //     isVip: true,
-        //     url: `/v7/weather/${day}d`,
-        //     data: {
-        //         location: wx.getStorageSync('location')||'',
-        //     },
-        // })
-        // console.log("dailyRes",JSON.stringify(dailyRes))
-        let dailyRes = jsonData
+        let dailyRes = await request({
+            apiType: 'qweather',
+            isVip: true,
+            url: `/v7/weather/${day}d`,
+            data: {
+                location: wx.getStorageSync('location') || '',
+            },
+        })
+        console.log("dailyRes", JSON.stringify(dailyRes))
+        // let dailyRes = jsonData
 
         console.log("dailyRes", dailyRes)
         let prefix = []
@@ -41,7 +52,9 @@ Page({
                 textDay: item.textDay,
                 textNight: item.textNight
             }
-
+            if (index === 0) {
+                dailyRes.daily[index].day = '今天'
+            }
         })
 
         console.log("dailyRes.daily", dailyRes.daily)
@@ -50,8 +63,8 @@ Page({
         })
 
         let cacheData = wx.getStorageSync('cache-data') ? JSON.parse(wx.getStorageSync('cache-data')) : null;
-
-        cacheData.daily7Datas = dailyRes.daily
+        cacheData.nowTimeDaily30 = nowTimeDaily30
+        cacheData.daily30Datas = [...prefix, ...dailyRes.daily]
         wx.setStorageSync("cache-data", JSON.stringify(cacheData))
         // this.initChart()
 

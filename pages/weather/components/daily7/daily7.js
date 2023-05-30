@@ -24,7 +24,6 @@ Component({
                         daily7Datas: cacheData.daily7Datas
                     })
                 } else {
-
                     this.getDaily(nowTimeDaily7)
                 }
             } else {
@@ -65,6 +64,12 @@ Component({
                     tempMax: item.tempMax,
                     textDay: item.textDay,
                     textNight: item.textNight
+                }
+                if (index === 0) {
+                    dailyRes.daily[index].fxDateFormat = '今天' + ' ' + formatDate(new Date(item.fxDate), 'MM-dd')
+                }
+                if (index === 1) {
+                    dailyRes.daily[index].fxDateFormat = '明天' + ' ' + formatDate(new Date(item.fxDate), 'MM-dd')
                 }
 
             })
